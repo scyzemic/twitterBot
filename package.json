@@ -24,5 +24,16 @@
   "bugs": {
     "url": "https://github.com/GMatias93/twitterBot/issues"
   },
-  "homepage": "https://github.com/GMatias93/twitterBot#readme"
+  "homepage": "https://github.com/GMatias93/twitterBot#readme",
+  "dependencies": {
+    "express": "^4.13.4"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.5.1",
+    "babel-core": "^6.5.1",
+    "babel-preset-es2015": "^6.5.0"
+  },
+  "babel": {
+    "presets": ["es2015"]
+  }
 }
