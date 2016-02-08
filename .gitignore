@@ -1,3 +1,4 @@
 node_modules
-.jshint
+.jshintrc
 .babelrc
+config.js
