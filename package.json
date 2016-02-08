@@ -1,0 +1,28 @@
+{
+  "name": "twitter-bot",
+  "version": "0.0.1",
+  "description": "twitter bot meant to sent preconceived tweet to users that use specific hashtags and or phrases. Built using React and ES2015",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GMatias93/twitterBot.git"
+  },
+  "keywords": [
+    "Twitter",
+    "ES2015",
+    "ES6",
+    "React",
+    "Javascript",
+    "Node",
+    "express"
+  ],
+  "author": "Gabriel Matias",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GMatias93/twitterBot/issues"
+  },
+  "homepage": "https://github.com/GMatias93/twitterBot#readme"
+}
