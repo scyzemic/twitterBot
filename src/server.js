@@ -1,6 +1,6 @@
 var Twitter = require('twitter');
 var express = require('express');
-var keys = require('./config');
+var keys = require('../config.js');
 var app = express();
 var port = process.env.port || 8300;
 
