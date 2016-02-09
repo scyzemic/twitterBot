@@ -14,17 +14,17 @@ var twit = new Twitter({
 var latestMentions = [];
 var idStrings = {};
 
-app.get('/*', function(req, res) {
+app.get('/*', function (req, res) {
   res.send('Hello World');
 });
 
-var server = app.listen(port, function() {
+var server = app.listen(port, function () {
   console.log('Basic server listening on ' + port);
 });
 
-var getMentions = function() {
+var getMentions = function () {
   twit.get('/statuses/mentions_timeline.json', { count: 10 },
-  function(error, data) {
+  function (error, data) {
     if (error) {
       console.error(error);
     }
@@ -41,10 +41,28 @@ var getMentions = function() {
       }
     }
 
-    console.log(idStrings);
-    console.log(latestMentions);
+    replyToMentions();
+
+    // console.log(idStrings);
+    // console.log(latestMentions);
   });
 
+};
+
+var replyToMentions = function () {
+  for (var i = 0; i < latestMentions.length; i++) {
+    var currentMention = latestMentions[i];
+    var responseTweet = 'Hello @';
+    responseTweet += currentMention.user;
+    responseTweet += "\n what's poppin in the streets? \n-actual User...";
+    twit.post('statuses/update', { status: responseTweet }, function (error, tweet) {
+      if (error) {
+        console.error(error);
+      } else {
+        console.log(tweet);
+      }
+    });
+  }
 };
 
 getMentions();
