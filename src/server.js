@@ -1,32 +1,32 @@
-var Twitter = require('twitter');
-var express = require('express');
-var keys = require('../config.js');
-var app = express();
-var port = process.env.port || 8300;
+import Twitter from 'twitter';
+import express from 'express';
+import keys from '../config.js';
+const app = express();
+const port = process.env.port || 8300;
 
-var twit = new Twitter({
+const twit = new Twitter({
   consumer_key: keys.TWITTER_CONSUMER_KEY,
   consumer_secret: keys.TWITTER_CONSUMER_SECRET,
   access_token_key: keys.TWITTER_ACCESS_TOKEN_KEY,
   access_token_secret: keys.TWITTER_ACCESS_TOKEN_SECRET,
 });
 
-var latestMentions = [];
-var idStrings = {};
+const latestMentions = [];
+const idStrings = {};
 
-app.get('/*', function (req, res) {
+app.get('/*', (req, res) => {
   res.send('Hello World');
 });
 
-var server = app.listen(port, function () {
-  console.log('Basic server listening on ' + port);
+const server = app.listen(port, () => {
+  console.log(`Basic server listening on ${port}`);
 });
 
-var tweetForJs = function () {
-  twit.stream('statuses/filter', { track: 'TGA' }, function (stream) {
-    stream.on('data', function (tweet) {
-      var target = tweet.user.screen_name;
-      twit.post('statuses/update', { status: '@' + target + ' I like talking about how awesome TGA is too!' }, function (error, tweet) {
+const tweetForJs = () => {
+  twit.stream('statuses/filter', { track: 'TGA' }, (stream) => {
+    stream.on('data', (tweet) => {
+      const target = tweet.user.screen_name;
+      twit.post('statuses/update', { status: `@${target} you need some friends man` }, (error, tweet) => {
         if (error) {
           console.error(error);
         } else {
@@ -35,7 +35,7 @@ var tweetForJs = function () {
       });
     });
 
-    stream.on('error', function (error) {
+    stream.on('error', (error) => {
       console.log(error);
     });
   });
@@ -43,47 +43,38 @@ var tweetForJs = function () {
 
 tweetForJs();
 
-// var getMentions = function () {
+// const getMentions = () => {
 //   twit.get('/statuses/mentions_timeline.json', { count: 10 },
-//   function (error, data) {
+//   (error, data) => {
 //     if (error) {
 //       console.error(error);
 //     }
 //
-//     for (var i = 0; i < data.length; i++) {
-//       var currentTweet = data[i];
-//       if (!idStrings[currentTweet.id_str]) {
-//         idStrings[currentTweet.id_str] = true;
-//         var tweetObj = {
-//           user: currentTweet.user.screen_name,
-//           text: currentTweet.text,
+//     data.forEach(tweet => {
+//       if (!idStrings[tweet.id_str]) {
+//         idStrings[tweet.id_str] = true;
+//         let tweetObj = {
+//           user: tweet.user.screen_name,
+//           text: tweet.text,
 //         };
 //         latestMentions.push(tweetObj);
 //       }
-//     }
-//
+//     });
 //     replyToMentions();
-
-    // console.log(idStrings);
-    // console.log(latestMentions);
-  // });
-
+//   });
 // };
-
-// var replyToMentions = function () {
-//   for (var i = 0; i < latestMentions.length; i++) {
-//     var currentMention = latestMentions[i];
-//     var responseTweet = 'Hello @';
-//     responseTweet += currentMention.user;
-//     responseTweet += "\n what's poppin in the streets? \n-actual User...";
-//     twit.post('statuses/update', { status: responseTweet }, function (error, tweet) {
+//
+// const replyToMentions = () => {
+//   latestMentions.forEach(mention => {
+//     let response = `Hello @${mention.user}, what's poppin in the streets?!`;
+//     twit.post('statuses/update', { status: response }, (error, tweet) => {
 //       if (error) {
 //         console.error(error);
 //       } else {
 //         console.log(tweet);
 //       }
 //     });
-//   }
+//   });
 // };
 
 // getMentions();

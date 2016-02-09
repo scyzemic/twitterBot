@@ -46,17 +46,28 @@
 
 	'use strict';
 
-	var Twitter = __webpack_require__(1);
-	var express = __webpack_require__(2);
-	var keys = __webpack_require__(3);
-	var app = express();
+	var _twitter = __webpack_require__(1);
+
+	var _twitter2 = _interopRequireDefault(_twitter);
+
+	var _express = __webpack_require__(2);
+
+	var _express2 = _interopRequireDefault(_express);
+
+	var _config = __webpack_require__(3);
+
+	var _config2 = _interopRequireDefault(_config);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var app = (0, _express2.default)();
 	var port = process.env.port || 8300;
 
-	var twit = new Twitter({
-	  consumer_key: keys.TWITTER_CONSUMER_KEY,
-	  consumer_secret: keys.TWITTER_CONSUMER_SECRET,
-	  access_token_key: keys.TWITTER_ACCESS_TOKEN_KEY,
-	  access_token_secret: keys.TWITTER_ACCESS_TOKEN_SECRET
+	var twit = new _twitter2.default({
+	  consumer_key: _config2.default.TWITTER_CONSUMER_KEY,
+	  consumer_secret: _config2.default.TWITTER_CONSUMER_SECRET,
+	  access_token_key: _config2.default.TWITTER_ACCESS_TOKEN_KEY,
+	  access_token_secret: _config2.default.TWITTER_ACCESS_TOKEN_SECRET
 	});
 
 	var latestMentions = [];
@@ -74,7 +85,7 @@
 	  twit.stream('statuses/filter', { track: 'TGA' }, function (stream) {
 	    stream.on('data', function (tweet) {
 	      var target = tweet.user.screen_name;
-	      twit.post('statuses/update', { status: '@' + target + ' I like talking about how awesome TGA is too!' }, function (error, tweet) {
+	      twit.post('statuses/update', { status: '@' + target + ' you need some friends man' }, function (error, tweet) {
 	        if (error) {
 	          console.error(error);
 	        } else {
@@ -91,47 +102,38 @@
 
 	tweetForJs();
 
-	// var getMentions = function () {
+	// const getMentions = () => {
 	//   twit.get('/statuses/mentions_timeline.json', { count: 10 },
-	//   function (error, data) {
+	//   (error, data) => {
 	//     if (error) {
 	//       console.error(error);
 	//     }
 	//
-	//     for (var i = 0; i < data.length; i++) {
-	//       var currentTweet = data[i];
-	//       if (!idStrings[currentTweet.id_str]) {
-	//         idStrings[currentTweet.id_str] = true;
-	//         var tweetObj = {
-	//           user: currentTweet.user.screen_name,
-	//           text: currentTweet.text,
+	//     data.forEach(tweet => {
+	//       if (!idStrings[tweet.id_str]) {
+	//         idStrings[tweet.id_str] = true;
+	//         let tweetObj = {
+	//           user: tweet.user.screen_name,
+	//           text: tweet.text,
 	//         };
 	//         latestMentions.push(tweetObj);
 	//       }
-	//     }
-	//
+	//     });
 	//     replyToMentions();
-
-	// console.log(idStrings);
-	// console.log(latestMentions);
-	// });
-
+	//   });
 	// };
-
-	// var replyToMentions = function () {
-	//   for (var i = 0; i < latestMentions.length; i++) {
-	//     var currentMention = latestMentions[i];
-	//     var responseTweet = 'Hello @';
-	//     responseTweet += currentMention.user;
-	//     responseTweet += "\n what's poppin in the streets? \n-actual User...";
-	//     twit.post('statuses/update', { status: responseTweet }, function (error, tweet) {
+	//
+	// const replyToMentions = () => {
+	//   latestMentions.forEach(mention => {
+	//     let response = `Hello @${mention.user}, what's poppin in the streets?!`;
+	//     twit.post('statuses/update', { status: response }, (error, tweet) => {
 	//       if (error) {
 	//         console.error(error);
 	//       } else {
 	//         console.log(tweet);
 	//       }
 	//     });
-	//   }
+	//   });
 	// };
 
 	// getMentions();
@@ -140,13 +142,13 @@
 /* 1 */
 /***/ function(module, exports) {
 
-	module.exports = commonjstwitter;
+	module.exports = require("twitter");
 
 /***/ },
 /* 2 */
 /***/ function(module, exports) {
 
-	module.exports = commonjsexpress;
+	module.exports = require("express");
 
 /***/ },
 /* 3 */

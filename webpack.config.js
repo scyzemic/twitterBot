@@ -8,7 +8,7 @@ fs.readdirSync('node_modules')
     return ['.bin'].indexOf(x) === -1;
   })
   .forEach(function (mod) {
-    nodeModules[mod] = 'commonjs' + mod;
+    nodeModules[mod] = 'commonjs ' + mod;
   });
 
 module.exports = {
@@ -25,4 +25,10 @@ module.exports = {
     },
   ],
   },
+  plugins: [
+    new webpack.IgnorePlugin(/\.(css|less)$/),
+    new webpack.BannerPlugin('require("source-map-support").install();',
+      { raw: true, entryOnly: false }),
+  ],
+  devtool: 'sourcemap',
 };
