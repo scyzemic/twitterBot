@@ -18,7 +18,7 @@ var deepmerge = DeepMerge(function (target, source, key) {
 var defaultConfig = {
   module: {
     loaders: [
-      { test: /\.js$/, exclude: /node_modules/, loaders: ['babel'] },
+      { test: /\.js$/, exclude: /node_modules/, loader: 'react-hot!babel' },
     ],
   },
 };
@@ -40,6 +40,9 @@ var frontendConfig = config({
     path: path.join(__dirname, 'client/build'),
     filename: 'frontend.js',
   },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+  ],
 });
 
 //Back-End
