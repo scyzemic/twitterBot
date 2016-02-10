@@ -2,10 +2,6 @@
   "name": "twitterbot",
   "version": "0.0.1",
   "description": "twitter bot meant to sent preconceived tweet to users that use specific hashtags and or phrases. Built using React and ES2015",
-  "main": "index.js",
-  "scripts": {
-    "start": "gulp build-backend"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/GMatias93/twitterBot.git"
