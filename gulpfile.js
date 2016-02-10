@@ -1,3 +1,4 @@
+var gulp = require('gulp');
 var webpack = require('webpack');
 var path = require('path');
 var fs = require('fs');
@@ -11,7 +12,7 @@ fs.readdirSync('node_modules')
     nodeModules[mod] = 'commonjs ' + mod;
   });
 
-module.exports = {
+var config = {
   entry: './src/server.js',
   target: 'node',
   output: {
@@ -21,6 +22,8 @@ module.exports = {
   externals: nodeModules,
   module: {
     loaders: [{
+      test: /\.js$/,
+      exclude: /node_modules/,
       loader: 'babel',
     },
   ],
@@ -32,3 +35,15 @@ module.exports = {
   ],
   devtool: 'sourcemap',
 };
+
+gulp.task('build-backend', function (done) {
+  webpack(config).run(function (err, stats) {
+    if (err) {
+      console.log('Error', err);
+    } else {
+      console.log(stats.toString());
+    }
+
+    done();
+  });
+});

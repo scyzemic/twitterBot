@@ -4,7 +4,7 @@
   "description": "twitter bot meant to sent preconceived tweet to users that use specific hashtags and or phrases. Built using React and ES2015",
   "main": "index.js",
   "scripts": {
-    "start": "webpack --watch"
+    "start": "gulp build-backend"
   },
   "repository": {
     "type": "git",
