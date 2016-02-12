@@ -1,4 +1,5 @@
 node_modules
 .jshintrc
 .babelrc
+.tern-port
 config.js
