@@ -26,7 +26,7 @@ const tweetForJs = () => {
   twit.stream('statuses/filter', { track: 'TGA' }, (stream) => {
     stream.on('data', (tweet) => {
       const target = tweet.user.screen_name;
-      twit.post('statuses/update', { status: `@${target} you need some friends man!` }, (error, tweet) => {
+      twit.post('statuses/update', { status: `@${target} yeah yeah yeah!` }, (error, tweet) => {
         if (error) {
           console.error(error);
         } else {

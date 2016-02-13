@@ -17,11 +17,11 @@ module.exports = [
     entry: [
       'webpack-dev-server/client?http://localhost:8080',
       'webpack/hot/only-dev-server',
-      './client/src/index.js',
+      './client/src/index.js'
     ],
     output: {
       path: path.resolve(__dirname, 'build'),
-      publicPath: '/frontend/',
+      publicPath: '/',
       filename: 'frontend.js'
     },
     module: {
@@ -48,11 +48,13 @@ module.exports = [
   },
   {
     name: 'backend',
-    entry: './server/server.js',
+    entry: [
+      './server/server.js'
+    ],
     target: 'node',
     output: {
       path: path.resolve(__dirname, 'build'),
-      publicPath: '/backend/',
+      publicPath: '/',
       filename: 'backend.js'
     },
     module: {
@@ -65,7 +67,7 @@ module.exports = [
       ]
     },
     externals: nodeModules,
-    plugins: [
+      plugins: [
       new webpack.IgnorePlugin(/\.(css|less)$/),
       new webpack.BannerPlugin('require("source-map-support").install();',
                                 { raw: true, entryonly: false }),
