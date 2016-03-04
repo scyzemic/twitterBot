@@ -21,6 +21,9 @@
     "url": "https://github.com/GMatias93/twitterBot/issues"
   },
   "homepage": "https://github.com/GMatias93/twitterBot#readme",
+  "babel": {
+    "presets": ["es2015", "react"]
+  },
   "dependencies": {
     "express": "^4.13.4",
     "react": "^0.14.7",
