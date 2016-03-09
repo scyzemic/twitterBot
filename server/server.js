@@ -47,26 +47,29 @@ const tweetForJs = () => {
 
 tweetForJs();
 
-// const getMentions = () => {
-//   twit.get('/statuses/mentions_timeline.json', { count: 10 },
-//   (error, data) => {
-//     if (error) {
-//       console.error(error);
-//     }
-//
-//     data.forEach(tweet => {
-//       if (!idStrings[tweet.id_str]) {
-//         idStrings[tweet.id_str] = true;
-//         let tweetObj = {
-//           user: tweet.user.screen_name,
-//           text: tweet.text,
-//         };
-//         latestMentions.push(tweetObj);
-//       }
-//     });
-//     replyToMentions();
-//   });
-// };
+const getList = () => {
+  twit.get('/lists/statuses.json', {
+      slug: 'lynn-nsa',
+      owner_screen_name: 'GabesBot'
+    },
+    (error, data) => {
+      if (error) {
+        console.error(error);
+      }
+
+      data.forEach(tweet => {
+        if (!idStrings[tweet.id_str]) {
+          idStrings[tweet.id_str] = true;
+          let tweetObj = {
+            user: tweet.user.screen_name,
+            text: tweet.text,
+          };
+          latestMentions.push(tweetObj);
+        }
+      });
+      replyToMentions();
+    });
+};
 //
 // const replyToMentions = () => {
 //   latestMentions.forEach(mention => {
