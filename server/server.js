@@ -8,7 +8,7 @@ const twit = new Twitter({
   consumer_key: keys.TWITTER_CONSUMER_KEY,
   consumer_secret: keys.TWITTER_CONSUMER_SECRET,
   access_token_key: keys.TWITTER_ACCESS_TOKEN_KEY,
-  access_token_secret: keys.TWITTER_ACCESS_TOKEN_SECRET,
+  access_token_secret: keys.TWITTER_ACCESS_TOKEN_SECRET
 });
 
 const latestMentions = [];
@@ -23,10 +23,14 @@ const server = app.listen(port, () => {
 });
 
 const tweetForJs = () => {
-  twit.stream('statuses/filter', { track: 'TGA' }, (stream) => {
+  twit.stream('statuses/filter', {
+    track: 'TGA'
+  }, (stream) => {
     stream.on('data', (tweet) => {
       const target = tweet.user.screen_name;
-      twit.post('statuses/update', { status: `@${target} yeah yeah yeah!` }, (error, tweet) => {
+      twit.post('statuses/update', {
+        status: `@${target} yeah yeah yeah!`
+      }, (error, tweet) => {
         if (error) {
           console.error(error);
         } else {

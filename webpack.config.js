@@ -11,38 +11,8 @@ fs.readdirSync('node_modules')
     nodeModules[mod] = 'commonjs ' + mod;
   });
 
-module.exports = [{
-  name: 'frontend',
-  entry: [
-    'webpack-dev-server/client?http://localhost:8080',
-    'webpack/hot/only-dev-server',
-    './client/src/index.js'
-  ],
-  output: {
-    path: path.resolve(__dirname, 'build'),
-    publicPath: '/',
-    filename: 'frontend.js'
-  },
-  module: {
-    loaders: [{
-      test: /\.jsx?$/,
-      exclude: /node_modules/,
-      loader: 'react-hot!babel'
-    }, ]
-  },
-  resolve: {
-    extensions: ['', '.js', '.jsx']
-  },
-  devServer: {
-    historyApiFallback: true,
-    contentBase: './client',
-    hot: true
-  },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-  ],
-  devtool: 'sourcemap'
-}, {
+module.exports = {
+
   name: 'backend',
   entry: [
     './server/server.js'
@@ -69,4 +39,4 @@ module.exports = [{
     }),
   ],
   devtool: 'sourcemap'
-}, ];
+};
